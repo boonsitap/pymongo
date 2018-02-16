@@ -23,7 +23,7 @@ class History(Resource):
                 args = parser.parse_args()
                 id = args['id']
                 info = office.find_one({"user.employee_id":id})
-                if(data):
+                if(info):
                         firstname = info['user']['firstname']
                         lastname = info['user']['lastname']
                         list_office = info['list_office']
@@ -36,8 +36,8 @@ class Register(Resource):
                 firstname = args['firstname']
                 lastname = args['lastname']
                 password = args['password']
-                data = office.find_one({"user.employee_id":id})
-                if(data):
+                info = office.find_one({"user.employee_id":id})
+                if(info):
                         return {"err":"has this id"}
                 office.insert({"user":{"employee_number":id,"firstname":firstname,"lastname":lastname,"password":password},"list_office":[]})
                 return {"firstname":firstname,"lastname":lastname,"employee_id":id,"password":password}
@@ -46,8 +46,8 @@ class Login(Resource):
                 args = parser.parse_args()
                 username = args['username']
                 password = args['password']
-                data = office.find_one({"user.employee_id":username,"user.password":password})
-                if(data):
+                info = office.find_one({"user.employee_id":username,"user.password":password})
+                if(info):
                         firstname = info['user']['firstname']
                         lastname = info['user']['lastname']
                         datetime_login = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
