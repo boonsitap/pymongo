@@ -38,7 +38,7 @@ class Register(Resource):
                 password = args['password']
                 info = office.find_one({"user.employee_id":id})
                 if(info):
-                        return {"err":"has this id"}
+                        return {"err":"System has this id"}
                 office.insert({"user":{"employee_number":id,"firstname":firstname,"lastname":lastname,"password":password},"list_office":[]})
                 return {"firstname":firstname,"lastname":lastname,"employee_id":id,"password":password}
 class Login(Resource):
